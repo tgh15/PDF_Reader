@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Sampul",
+    "description": "Description for Item 1",
+    "page": 0
+  },
+  {
+    "title": "Bab 1 Membuat Surat Lamaran Pekerjaan",
+    "description": "Description for Item 2",
+    "page": 1
+  },
+  {
+    "title": "Bab 2  Menikmati Cerita Sejarah Indonesia",
+    "description": "Description for Item 3",
+    "page": 31
+  },
+  {
+    "title": "Bab 3 Memahami Isu Teknis Lewat Editorial",
+    "description": "Description for Item 4",
+    "page": 87
+  },
+  {
+    "title": "Bab 4  Menikmati Novel",
+    "description": "Description for Item 5",
+    "page": 109
+  },
+  {
+    "title": "Bab 5 Menyajikan Gagasan Melalui Artikel",
+    "description": "sdsdsd",
+    "page": 131
+  }
+]
