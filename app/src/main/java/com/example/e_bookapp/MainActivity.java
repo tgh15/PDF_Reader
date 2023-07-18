@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -30,10 +31,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static Integer halaman = 0; //variabel penampung halaman
-    public EditText cariHal;
-    public Button btnCari;
-    ImageButton btnPrev, btnNext, btnDaftarIsi;
-    AlertDialog.Builder dialog;
+    ImageButton btnPrev, btnNext, btnDaftarIsi, btnCari;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +42,31 @@ public class MainActivity extends AppCompatActivity {
         List<DaftarIsiItem> dataList = getDataFromJson();
 
         //cari halaman
-        cariHal = findViewById(R.id.cari);
-        cariHal.setText(halaman.toString());
-
         btnCari = findViewById(R.id.btnCari);
         btnCari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String hal = cariHal.getText().toString();
-                halaman = Integer.parseInt(hal);
-                display(halaman + 5);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Cari Halaman...");
+                final EditText input = new EditText(MainActivity.this);
+                builder.setView(input);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                builder.setPositiveButton("Cari", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        halaman = Integer.parseInt(input.getText().toString());
+                        display(halaman+5);
+                    }
+                });
+
+                builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+                builder.show();
             }
         });
 
@@ -64,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(halaman == 0) return;
                 halaman--;
-                cariHal.setText(halaman.toString());
                 display(halaman+5);
             }
         });
@@ -75,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 halaman++;
-                cariHal.setText(halaman.toString());
                 display(halaman+5);
             }
         });
@@ -89,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                 dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
-                        cariHal.setText(halaman.toString());
                         if (halaman == 0) {
                             display(halaman);
                         }else{
